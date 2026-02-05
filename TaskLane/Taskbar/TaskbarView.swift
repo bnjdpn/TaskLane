@@ -201,19 +201,22 @@ struct ShowDesktopButton: View {
     @State private var isHovered = false
 
     var body: some View {
-        Button(action: { appState.toggleShowDesktop() }) {
-            if isHorizontal {
-                // Vertical bar for horizontal taskbar
-                RoundedRectangle(cornerRadius: 1)
-                    .fill(Color.primary.opacity(isHovered ? 0.3 : 0.15))
-                    .frame(width: 4, height: 24)
-            } else {
-                // Horizontal bar for vertical taskbar
-                RoundedRectangle(cornerRadius: 1)
-                    .fill(Color.primary.opacity(isHovered ? 0.3 : 0.15))
-                    .frame(width: 24, height: 4)
+        Button(
+            action: { appState.toggleShowDesktop() },
+            label: {
+                if isHorizontal {
+                    // Vertical bar for horizontal taskbar
+                    RoundedRectangle(cornerRadius: 1)
+                        .fill(Color.primary.opacity(isHovered ? 0.3 : 0.15))
+                        .frame(width: 4, height: 24)
+                } else {
+                    // Horizontal bar for vertical taskbar
+                    RoundedRectangle(cornerRadius: 1)
+                        .fill(Color.primary.opacity(isHovered ? 0.3 : 0.15))
+                        .frame(width: 24, height: 4)
+                }
             }
-        }
+        )
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.15), value: isHovered)
