@@ -227,57 +227,6 @@ a:hover {
     color: var(--text-secondary);
 }
 
-/* Comparison */
-.comparison {
-    padding: 80px 24px;
-}
-
-.comparison h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 48px;
-}
-
-.comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--bg-secondary);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.comparison-table th,
-.comparison-table td {
-    padding: 16px 24px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-}
-
-.comparison-table th {
-    background: var(--bg-tertiary);
-    font-weight: 600;
-}
-
-.comparison-table th:first-child,
-.comparison-table td:first-child {
-    text-align: left;
-}
-
-.comparison-table .check {
-    color: var(--success);
-    font-size: 1.2rem;
-}
-
-.comparison-table .cross {
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-}
-
-.comparison-table .highlight {
-    color: var(--success);
-    font-weight: 600;
-}
-
 /* Installation */
 .installation {
     padding: 80px 24px;
@@ -440,14 +389,5 @@ footer .license {
     .install-steps {
         flex-direction: column;
         align-items: center;
-    }
-
-    .comparison-table {
-        font-size: 0.9rem;
-    }
-
-    .comparison-table th,
-    .comparison-table td {
-        padding: 12px 8px;
     }
 }
