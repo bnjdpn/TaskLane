@@ -22,7 +22,7 @@ let package = Package(
                 .process("Localization")
             ],
             swiftSettings: [
-                // StrictConcurrency is enabled by default in Swift 6
+                .swiftLanguageMode(.v5)  // Use Swift 5 mode until full Swift 6 migration
             ]
         ),
         .testTarget(
