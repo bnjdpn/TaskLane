@@ -32,7 +32,10 @@ let package = Package(
                 "TaskLane"
                 // ViewInspector temporarily removed - causes SIGSEGV on CI
             ],
-            path: "Tests/TaskLaneTests"
+            path: "Tests/TaskLaneTests",
+            swiftSettings: [
+                .swiftLanguageMode(.v5)  // Match main target's language mode
+            ]
         )
     ]
 )
