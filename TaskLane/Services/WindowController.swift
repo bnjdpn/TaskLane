@@ -30,7 +30,6 @@ final class WindowController: WindowControllerProtocol {
     /// Focus a specific window by its window ID
     func focusWindow(windowID: CGWindowID, pid: pid_t) -> Bool {
         guard Self.hasAccessibilityPermission() else {
-            Self.requestAccessibilityPermission()
             return false
         }
 
@@ -67,7 +66,6 @@ final class WindowController: WindowControllerProtocol {
     /// Close a specific window
     func closeWindow(windowID: CGWindowID, pid: pid_t) -> Bool {
         guard Self.hasAccessibilityPermission() else {
-            Self.requestAccessibilityPermission()
             return false
         }
 
@@ -100,7 +98,6 @@ final class WindowController: WindowControllerProtocol {
     /// Minimize a specific window
     func minimizeWindow(windowID: CGWindowID, pid: pid_t) -> Bool {
         guard Self.hasAccessibilityPermission() else {
-            Self.requestAccessibilityPermission()
             return false
         }
 
@@ -127,7 +124,6 @@ final class WindowController: WindowControllerProtocol {
     /// Unminimize (restore) a specific window
     func unminimizeWindow(windowID: CGWindowID, pid: pid_t) -> Bool {
         guard Self.hasAccessibilityPermission() else {
-            Self.requestAccessibilityPermission()
             return false
         }
 
