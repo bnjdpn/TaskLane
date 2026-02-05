@@ -3,7 +3,7 @@ import Foundation
 
 /// Monitors running applications via NSWorkspace notifications
 @MainActor
-final class AppMonitor {
+final class AppMonitor: AppMonitorProtocol {
     // MARK: - Callbacks
 
     var onAppsChanged: (([NSRunningApplication]) -> Void)?

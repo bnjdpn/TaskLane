@@ -3,13 +3,13 @@ import ApplicationServices
 
 /// Controls windows using macOS Accessibility APIs (requires Accessibility permission)
 @MainActor
-final class WindowController {
+final class WindowController: WindowControllerProtocol {
 
     // MARK: - Singleton
 
     static let shared = WindowController()
 
-    private init() {}
+    init() {}
 
     // MARK: - Permission Check
 

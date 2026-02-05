@@ -19,12 +19,53 @@ jobs:
         with:
           xcode-version: latest-stable
 
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: SwiftLint
+        run: swiftlint lint --strict --reporter github-actions-logging
+
       - name: Build
         run: swift build -c release
 
-      - name: Run Tests
-        run: swift test
-        continue-on-error: true  # Tests may not exist yet
+      - name: Run Tests with Coverage
+        run: swift test --enable-code-coverage
+
+      - name: Generate Coverage Report
+        run: |
+          BIN_PATH=$(swift build --show-bin-path)
+          XCTEST_PATH=$(find .build -name "TaskLanePackageTests.xctest" -type d | head -1)
+
+          if [ -z "$XCTEST_PATH" ]; then
+            echo "Could not find xctest bundle, trying alternative path..."
+            COV_BIN=$(find .build -name "TaskLanePackageTests" -type f -perm +111 | head -1)
+          else
+            COV_BIN="$XCTEST_PATH/Contents/MacOS/TaskLanePackageTests"
+          fi
+
+          PROF_DATA=$(find .build -name "default.profdata" -type f | head -1)
+
+          echo "Coverage binary: $COV_BIN"
+          echo "Profile data: $PROF_DATA"
+
+          xcrun llvm-cov export "$COV_BIN" \
+            -instr-profile="$PROF_DATA" \
+            -format=lcov \
+            -ignore-filename-regex=".build|Tests" \
+            > coverage.lcov
+
+          # Show coverage summary
+          xcrun llvm-cov report "$COV_BIN" \
+            -instr-profile="$PROF_DATA" \
+            -ignore-filename-regex=".build|Tests"
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.lcov
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4

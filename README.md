@@ -19,6 +19,9 @@
   <a href="https://github.com/bnjdpn/TaskLane/actions">
     <img src="https://img.shields.io/github/actions/workflow/status/bnjdpn/TaskLane/build.yml?style=flat-square" alt="Build Status">
   </a>
+  <a href="https://codecov.io/gh/bnjdpn/TaskLane">
+    <img src="https://img.shields.io/codecov/c/github/bnjdpn/TaskLane?style=flat-square" alt="Coverage">
+  </a>
 </p>
 
 <p align="center">

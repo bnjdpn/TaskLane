@@ -2,7 +2,7 @@ import AppKit
 import ScreenCaptureKit
 
 /// Captures window thumbnails using ScreenCaptureKit
-actor ThumbnailProvider {
+actor ThumbnailProvider: ThumbnailProviderProtocol {
     // MARK: - Types
 
     private struct CachedThumbnail {
