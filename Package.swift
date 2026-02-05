@@ -10,6 +10,9 @@ let package = Package(
     products: [
         .executable(name: "TaskLane", targets: ["TaskLane"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/nalexn/ViewInspector", from: "0.10.0")
+    ],
     targets: [
         .executableTarget(
             name: "TaskLane",
@@ -21,6 +24,14 @@ let package = Package(
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency")
             ]
+        ),
+        .testTarget(
+            name: "TaskLaneTests",
+            dependencies: [
+                "TaskLane",
+                .product(name: "ViewInspector", package: "ViewInspector")
+            ],
+            path: "Tests/TaskLaneTests"
         )
     ]
 )

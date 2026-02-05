@@ -3,7 +3,7 @@ import CoreGraphics
 import Foundation
 
 /// Retrieves window information via CGWindowListCopyWindowInfo
-final class WindowMonitor: Sendable {
+final class WindowMonitor: WindowMonitorProtocol, Sendable {
 
     /// Get all visible windows grouped by owning application bundle ID
     @MainActor

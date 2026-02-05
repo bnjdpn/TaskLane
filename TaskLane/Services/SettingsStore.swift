@@ -2,7 +2,7 @@ import Foundation
 
 /// Persists settings to UserDefaults
 @MainActor
-final class SettingsStore {
+final class SettingsStore: SettingsStoreProtocol {
     private let defaults: UserDefaults
     private let key = "TaskLaneSettings"
 

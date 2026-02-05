@@ -150,7 +150,7 @@ struct PermissionsSettingsView: View {
     // MARK: - Actions
 
     private func checkPermissions() {
-        if PermissionManager.hasScreenRecording() {
+        if PermissionManager.shared.hasScreenRecording() {
             screenRecordingStatus = .granted
             appState.hasScreenRecordingPermission = true
         } else {
@@ -160,13 +160,13 @@ struct PermissionsSettingsView: View {
     }
 
     private func requestScreenRecording() {
-        PermissionManager.openScreenRecordingSettings()
+        PermissionManager.shared.openScreenRecordingSettings()
 
         // Start polling for permission change using a Task
         Task {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(1))
-                if PermissionManager.hasScreenRecording() {
+                if PermissionManager.shared.hasScreenRecording() {
                     screenRecordingStatus = .granted
                     appState.hasScreenRecordingPermission = true
                     appState.refreshWindowList()

@@ -1,30 +1,32 @@
 import AppKit
+import ApplicationServices
 import CoreGraphics
 import ScreenCaptureKit
 
 /// Manages permission checking and requesting
-enum PermissionManager {
+@MainActor
+final class PermissionManager: PermissionManagerProtocol {
+
+    // MARK: - Singleton
+
+    static let shared = PermissionManager()
+
+    init() {}
 
     // MARK: - Screen Recording
 
     /// Check if Screen Recording permission is granted
-    @MainActor
-    static func hasScreenRecording() -> Bool {
-        // CGPreflightScreenCaptureAccess returns true if permission is granted
-        return CGPreflightScreenCaptureAccess()
+    func hasScreenRecording() -> Bool {
+        CGPreflightScreenCaptureAccess()
     }
 
     /// Request Screen Recording permission (triggers system dialog)
-    @MainActor
-    static func requestScreenRecording() {
-        // This will trigger the system permission dialog if not already granted
+    func requestScreenRecording() {
         CGRequestScreenCaptureAccess()
     }
 
     /// Open System Settings to Screen Recording pane
-    @MainActor
-    static func openScreenRecordingSettings() {
-        // Deep link to Privacy & Security > Screen Recording
+    func openScreenRecordingSettings() {
         if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture") {
             NSWorkspace.shared.open(url)
         }
@@ -32,8 +34,7 @@ enum PermissionManager {
 
     /// Check permission by attempting to get window names
     /// This is a more reliable check as it verifies actual capability
-    @MainActor
-    static func hasScreenRecordingByWindowCheck() -> Bool {
+    func hasScreenRecordingByWindowCheck() -> Bool {
         guard let windowList = CGWindowListCopyWindowInfo(
             .optionOnScreenOnly,
             kCGNullWindowID
@@ -49,15 +50,26 @@ enum PermissionManager {
         }
 
         // Check if there are any windows to test against
-        // If no windows have names and there are windows, we likely don't have permission
         let hasWindows = !windowList.isEmpty
         if hasWindows {
-            // We have windows but no names - likely no permission
             return false
         }
 
-        // No windows to test - fall back to preflight check
         return CGPreflightScreenCaptureAccess()
+    }
+
+    // MARK: - Accessibility
+
+    /// Check if Accessibility permission is granted
+    func hasAccessibilityPermission() -> Bool {
+        AXIsProcessTrusted()
+    }
+
+    /// Request Accessibility permission (opens System Settings)
+    func requestAccessibilityPermission() {
+        let key = "AXTrustedCheckOptionPrompt" as CFString
+        let options = [key: true] as CFDictionary
+        AXIsProcessTrustedWithOptions(options)
     }
 
     // MARK: - Permission Status
@@ -69,13 +81,10 @@ enum PermissionManager {
     }
 
     /// Get detailed permission status
-    @MainActor
-    static func screenRecordingStatus() -> PermissionStatus {
+    func screenRecordingStatus() -> PermissionStatus {
         if CGPreflightScreenCaptureAccess() {
             return .granted
         }
-        // We can't easily distinguish between "denied" and "not yet asked"
-        // without actually requesting, so we return denied to be safe
         return .denied
     }
 }

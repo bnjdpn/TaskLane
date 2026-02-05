@@ -32,19 +32,27 @@ final class AppState {
 
     // MARK: - Services
 
-    private let settingsStore: SettingsStore
-    private let appMonitor: AppMonitor
-    private let windowMonitor: WindowMonitor
-    private let thumbnailProvider: ThumbnailProvider
+    private let settingsStore: any SettingsStoreProtocol
+    private let appMonitor: any AppMonitorProtocol
+    private let windowMonitor: any WindowMonitorProtocol
+    private let thumbnailProvider: any ThumbnailProviderProtocol
+    private let permissionManager: any PermissionManagerProtocol
 
     // MARK: - Initialization
 
-    init() {
-        self.settingsStore = SettingsStore()
-        self.settings = settingsStore.load()
-        self.appMonitor = AppMonitor()
-        self.windowMonitor = WindowMonitor()
-        self.thumbnailProvider = ThumbnailProvider()
+    init(
+        settingsStore: (any SettingsStoreProtocol)? = nil,
+        appMonitor: (any AppMonitorProtocol)? = nil,
+        windowMonitor: (any WindowMonitorProtocol)? = nil,
+        thumbnailProvider: (any ThumbnailProviderProtocol)? = nil,
+        permissionManager: (any PermissionManagerProtocol)? = nil
+    ) {
+        self.settingsStore = settingsStore ?? SettingsStore()
+        self.appMonitor = appMonitor ?? AppMonitor()
+        self.windowMonitor = windowMonitor ?? WindowMonitor()
+        self.thumbnailProvider = thumbnailProvider ?? ThumbnailProvider()
+        self.permissionManager = permissionManager ?? PermissionManager()
+        self.settings = self.settingsStore.load()
 
         setupBindings()
     }
@@ -113,7 +121,7 @@ final class AppState {
     // MARK: - Permissions
 
     private func checkPermissions() {
-        hasScreenRecordingPermission = PermissionManager.hasScreenRecording()
+        hasScreenRecordingPermission = permissionManager.hasScreenRecording()
     }
 
     func recheckPermissions() {
