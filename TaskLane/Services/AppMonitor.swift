@@ -18,8 +18,7 @@ final class AppMonitor: AppMonitorProtocol {
 
     // MARK: - Lifecycle
 
-    nonisolated deinit {
-        // Cannot call MainActor methods from deinit
+    deinit {
         // Observers will be cleaned up when the workspace notification center is deallocated
     }
 

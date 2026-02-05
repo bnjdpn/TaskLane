@@ -1,5 +1,5 @@
 import AppKit
-import ScreenCaptureKit
+@preconcurrency import ScreenCaptureKit
 
 /// Captures window thumbnails using ScreenCaptureKit
 actor ThumbnailProvider: ThumbnailProviderProtocol {

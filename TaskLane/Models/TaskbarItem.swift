@@ -1,8 +1,9 @@
-import AppKit
+@preconcurrency import AppKit
 import Foundation
 
 /// Represents an item in the taskbar (pinned or running app)
-struct TaskbarItem: Identifiable, Hashable, Sendable {
+/// Note: NSImage is thread-safe and Sendable on macOS 14+
+struct TaskbarItem: Identifiable, Hashable, @unchecked Sendable {
     let id: UUID
     let bundleIdentifier: String
     let displayName: String

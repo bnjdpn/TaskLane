@@ -22,7 +22,7 @@ let package = Package(
                 .process("Localization")
             ],
             swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency")
+                // StrictConcurrency is enabled by default in Swift 6
             ]
         ),
         .testTarget(
