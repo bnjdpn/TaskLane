@@ -1,4 +1,4 @@
-import AppKit
+@preconcurrency import AppKit
 import Observation
 import SwiftUI
 
