@@ -14,15 +14,19 @@ swift run
 # Run tests
 swift test
 
+# Lint (required before push - CI runs with --strict)
+swiftlint lint --strict
+
 # Build with Xcode (CI uses this)
 xcodebuild build
 ```
 
 ## Project Overview
 
-TaskLane is a Windows 11-style taskbar application for macOS, built with Swift 6.0 and SwiftUI. It provides window management, app launching, and window previews through a customizable taskbar panel.
+TaskLane is a Windows 11-style taskbar application for macOS, built with SwiftUI. It provides window management, app launching, and window previews through a customizable taskbar panel.
 
-**Platform**: macOS 15+ (Sonoma)
+**Platform**: macOS 15+ (Sequoia)
+**Swift**: 6.0 toolchain with `.swiftLanguageMode(.v5)` (strict concurrency not fully adopted yet)
 **License**: MIT
 
 ## Architecture
@@ -64,10 +68,11 @@ TaskbarView (main container)
 
 ## Key Files
 
-- `Package.swift`: SPM config (Swift 6.0, strict concurrency)
+- `Package.swift`: SPM config (Swift 6.0 tools, Swift 5 language mode)
 - `Info.plist`: LSUIElement=true (menu bar accessory app), permission descriptions
 - `TaskLane.entitlements`: No sandbox (required for Accessibility/Screen Recording APIs)
 - `TaskLane/Models/Settings.swift`: All configuration options (position, size, colors, behavior)
+- `.swiftlint.yml`: Linter config (CI uses `--strict`)
 
 ## Permissions Required
 
@@ -80,3 +85,19 @@ Without these permissions, the app has limited functionality (no window names, n
 
 Supported languages: English, French
 Strings file: `TaskLane/Localization/Localizable.xcstrings`
+
+## Testing
+
+Tests are in `Tests/TaskLaneTests/`. Only model tests run in CI - service tests crash due to missing screen/accessibility access.
+
+```bash
+swift test                        # Run all tests locally
+swift test --enable-code-coverage # With coverage (CI uses this)
+```
+
+## Gotchas
+
+- **CI crashes with @MainActor tests**: Tests using `@MainActor` + Swift Testing cause SIGSEGV in GitHub Actions. Keep only model tests for CI.
+- **NSImage not Sendable**: Don't use `async let` with methods returning `NSImage?` - causes Swift 6 concurrency errors.
+- **Permission dialogs**: Never auto-call `requestAccessibilityPermission()` - triggers dialogs during builds/tests. Only request on explicit user action.
+- **SwiftLint trailing closures**: Use explicit `action:` and `label:` parameters for `Button`, not trailing closure syntax.
