@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskLane - Windows Taskbar for macOS</title>
+    <meta name="description" content="A free, open-source Windows-style taskbar for macOS. Perfect for Windows users transitioning to Mac.">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="TaskLane - Windows Taskbar for macOS">
+    <meta property="og:description" content="A free, open-source Windows-style taskbar for macOS">
+    <meta property="og:image" content="assets/images/og-image.png">
+    <meta property="og:url" content="https://bnjdpn.github.io/TaskLane">
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
+        <button onclick="setLang('fr')" id="btn-fr">FR</button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <img src="assets/images/icon.png" alt="TaskLane" class="hero-icon">
+            <h1>TaskLane</h1>
+            <p class="tagline" data-en="A Windows-style taskbar for macOS" data-fr="Une barre des taches Windows pour macOS"></p>
+            <p class="subtitle" data-en="Free & Open Source" data-fr="Gratuit & Open Source"></p>
+
+            <div class="cta-buttons">
+                <a href="https://github.com/bnjdpn/TaskLane/releases/latest" class="btn btn-primary">
+                    <span data-en="Download for macOS" data-fr="Telecharger pour macOS"></span>
+                </a>
+                <a href="https://github.com/bnjdpn/TaskLane" class="btn btn-secondary">
+                    <span data-en="View on GitHub" data-fr="Voir sur GitHub"></span>
+                </a>
+            </div>
+
+            <p class="requirements" data-en="Requires macOS 14.0 (Sonoma) or later" data-fr="Necessite macOS 14.0 (Sonoma) ou plus recent"></p>
+        </div>
+    </header>
+
+    <!-- Screenshot -->
+    <section class="screenshot">
+        <div class="container">
+            <img src="assets/images/screenshot.png" alt="TaskLane Screenshot" class="screenshot-img">
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 data-en="Features" data-fr="Fonctionnalites"></h2>
+
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">🪟</div>
+                    <h3 data-en="Windows 11 Style" data-fr="Style Windows 11"></h3>
+                    <p data-en="Familiar taskbar design that Windows users love" data-fr="Design familier que les utilisateurs Windows adorent"></p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🖼️</div>
+                    <h3 data-en="Window Thumbnails" data-fr="Miniatures de fenetres"></h3>
+                    <p data-en="Hover over apps to see live window previews" data-fr="Survolez les apps pour voir les apercu des fenetres"></p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3 data-en="Focus Windows" data-fr="Focus fenetre"></h3>
+                    <p data-en="Click to focus a specific window, not just the app" data-fr="Cliquez pour focus une fenetre specifique"></p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🖥️</div>
+                    <h3 data-en="Multi-Monitor" data-fr="Multi-ecran"></h3>
+                    <p data-en="One taskbar per screen, showing relevant windows" data-fr="Une barre par ecran, montrant les fenetres pertinentes"></p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">📌</div>
+                    <h3 data-en="Pin Apps" data-fr="Epingler des apps"></h3>
+                    <p data-en="Keep your favorite apps always visible" data-fr="Gardez vos apps preferees toujours visibles"></p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🆓</div>
+                    <h3 data-en="Free & Open Source" data-fr="Gratuit & Open Source"></h3>
+                    <p data-en="No ads, no tracking, no subscription" data-fr="Pas de pub, pas de tracking, pas d'abonnement"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison">
+        <div class="container">
+            <h2 data-en="Why TaskLane?" data-fr="Pourquoi TaskLane ?"></h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th data-en="Feature" data-fr="Fonctionnalite"></th>
+                        <th>TaskLane</th>
+                        <th>uBar ($30)</th>
+                        <th>Taskbar ($25)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-en="Price" data-fr="Prix"></td>
+                        <td class="highlight" data-en="Free" data-fr="Gratuit"></td>
+                        <td>$30</td>
+                        <td>$25</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Window thumbnails" data-fr="Miniatures"></td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Focus individual windows" data-fr="Focus fenetre"></td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Multi-monitor" data-fr="Multi-ecran"></td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Space filtering" data-fr="Filtrage bureaux"></td>
+                        <td class="check">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Open source" data-fr="Open source"></td>
+                        <td class="check highlight">✓</td>
+                        <td class="cross">✗</td>
+                        <td class="cross">✗</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section class="installation">
+        <div class="container">
+            <h2 data-en="Installation" data-fr="Installation"></h2>
+
+            <div class="install-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p data-en="Download the DMG file" data-fr="Telechargez le fichier DMG"></p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p data-en="Drag TaskLane to Applications" data-fr="Glissez TaskLane dans Applications"></p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p data-en="Right-click > Open on first launch" data-fr="Clic-droit > Ouvrir au premier lancement"></p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <p data-en="Grant permissions when prompted" data-fr="Accordez les permissions demandees"></p>
+                </div>
+            </div>
+
+            <div class="permissions-note">
+                <h3 data-en="Required Permissions" data-fr="Permissions requises"></h3>
+                <ul>
+                    <li data-en="Screen Recording - for window thumbnails" data-fr="Enregistrement d'ecran - pour les miniatures"></li>
+                    <li data-en="Accessibility - for window control" data-fr="Accessibilite - pour controler les fenetres"></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>FAQ</h2>
+
+            <details>
+                <summary data-en="Why do I need to right-click > Open?" data-fr="Pourquoi dois-je faire clic-droit > Ouvrir ?"></summary>
+                <p data-en="TaskLane is not notarized by Apple, so macOS shows a security warning. Right-clicking and selecting 'Open' bypasses this for apps from identified developers." data-fr="TaskLane n'est pas notarise par Apple, donc macOS affiche un avertissement. Clic-droit puis 'Ouvrir' contourne cela pour les apps de developpeurs identifies."></p>
+            </details>
+
+            <details>
+                <summary data-en="Is TaskLane safe?" data-fr="TaskLane est-il sur ?"></summary>
+                <p data-en="Yes! TaskLane is open source - you can review all the code on GitHub. It doesn't collect any data or connect to the internet." data-fr="Oui ! TaskLane est open source - vous pouvez examiner tout le code sur GitHub. Il ne collecte aucune donnee et ne se connecte pas a Internet."></p>
+            </details>
+
+            <details>
+                <summary data-en="Why does it need Accessibility permission?" data-fr="Pourquoi a-t-il besoin de la permission Accessibilite ?"></summary>
+                <p data-en="Accessibility permission allows TaskLane to focus, minimize, and close individual windows - just like the Windows taskbar does." data-fr="La permission Accessibilite permet a TaskLane de focus, minimiser et fermer des fenetres individuelles - comme la barre des taches Windows."></p>
+            </details>
+
+            <details>
+                <summary data-en="Can I hide the macOS Dock?" data-fr="Puis-je masquer le Dock macOS ?"></summary>
+                <p data-en="Yes! Go to System Settings > Desktop & Dock and enable 'Automatically hide and show the Dock'. TaskLane works great as a Dock replacement." data-fr="Oui ! Allez dans Reglages Systeme > Bureau et Dock et activez 'Masquer et afficher automatiquement le Dock'. TaskLane fonctionne tres bien comme remplacement du Dock."></p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>
+                <span data-en="Made with ❤️ for Windows refugees on Mac" data-fr="Fait avec ❤️ pour les refugies Windows sur Mac"></span>
+            </p>
+            <p class="links">
+                <a href="https://github.com/bnjdpn/TaskLane">GitHub</a> •
+                <a href="https://github.com/bnjdpn/TaskLane/releases">Releases</a> •
+                <a href="https://github.com/bnjdpn/TaskLane/issues">Issues</a>
+            </p>
+            <p class="license">MIT License © 2025</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
