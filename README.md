@@ -45,12 +45,6 @@
 - **System Tray** - Clock with date display
 - **Customizable** - Position, size, blur effect, and more
 
-## Screenshots
-
-<p align="center">
-  <img src="docs/assets/images/screenshot-light.png" alt="TaskLane Light Mode" width="800">
-</p>
-
 ## Installation
 
 ### Download
