@@ -11,7 +11,8 @@ let package = Package(
         .executable(name: "TaskLane", targets: ["TaskLane"])
     ],
     dependencies: [
-        .package(url: "https://github.com/nalexn/ViewInspector", from: "0.10.0")
+        // ViewInspector temporarily removed - causes SIGSEGV on CI
+        // .package(url: "https://github.com/nalexn/ViewInspector", from: "0.10.0")
     ],
     targets: [
         .executableTarget(
@@ -28,8 +29,8 @@ let package = Package(
         .testTarget(
             name: "TaskLaneTests",
             dependencies: [
-                "TaskLane",
-                .product(name: "ViewInspector", package: "ViewInspector")
+                "TaskLane"
+                // ViewInspector temporarily removed - causes SIGSEGV on CI
             ],
             path: "Tests/TaskLaneTests"
         )
