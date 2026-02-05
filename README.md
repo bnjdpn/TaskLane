@@ -56,12 +56,6 @@ Download the latest DMG from [**Releases**](https://github.com/bnjdpn/TaskLane/r
 3. Launch TaskLane
 4. **Right-click > Open** on first launch (app is not notarized)
 
-### Homebrew (coming soon)
-
-```bash
-brew install --cask tasklane
-```
-
 ## Usage
 
 ### First Launch
