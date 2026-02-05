@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: macos-14
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Get version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Build Release
+        run: swift build -c release
+
+      - name: Create App Bundle
+        run: |
+          chmod +x ./Scripts/create-app.sh
+          ./Scripts/create-app.sh
+
+      - name: Create DMG
+        run: |
+          chmod +x ./Scripts/create-dmg.sh
+          ./Scripts/create-dmg.sh ${{ steps.version.outputs.VERSION }}
+
+      - name: Create ZIP
+        run: |
+          cd dist
+          zip -r TaskLane-${{ steps.version.outputs.VERSION }}.zip TaskLane.app
+          cd ..
+
+      - name: Generate Release Notes
+        id: notes
+        run: |
+          echo "NOTES<<EOF" >> $GITHUB_OUTPUT
+          echo "## TaskLane v${{ steps.version.outputs.VERSION }}" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### Installation" >> $GITHUB_OUTPUT
+          echo "1. Download \`TaskLane-${{ steps.version.outputs.VERSION }}.dmg\`" >> $GITHUB_OUTPUT
+          echo "2. Open the DMG and drag TaskLane to Applications" >> $GITHUB_OUTPUT
+          echo "3. **Right-click > Open** on first launch (app is not notarized)" >> $GITHUB_OUTPUT
+          echo "4. Grant Screen Recording and Accessibility permissions when prompted" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "### Requirements" >> $GITHUB_OUTPUT
+          echo "- macOS 14.0 (Sonoma) or later" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "See [CHANGELOG.md](https://github.com/bnjdpn/TaskLane/blob/main/CHANGELOG.md) for details." >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: TaskLane v${{ steps.version.outputs.VERSION }}
+          body: ${{ steps.notes.outputs.NOTES }}
+          draft: false
+          prerelease: false
+          files: |
+            dist/TaskLane-${{ steps.version.outputs.VERSION }}.dmg
+            dist/TaskLane-${{ steps.version.outputs.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
