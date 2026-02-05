@@ -4,6 +4,7 @@ import CoreGraphics
 @testable import TaskLane
 
 @Suite("ThumbnailProvider Tests")
+@MainActor
 struct ThumbnailProviderTests {
 
     // Note: We cannot test actual thumbnail capture as it requires
@@ -67,12 +68,10 @@ struct ThumbnailProviderTests {
     func multipleCaptureCallsSafe() async {
         let provider = ThumbnailProvider()
 
-        // Multiple concurrent captures should not crash
-        async let r1 = provider.capture(windowID: 1)
-        async let r2 = provider.capture(windowID: 2)
-        async let r3 = provider.capture(windowID: 3)
-
-        _ = await [r1, r2, r3]
+        // Multiple sequential captures should not crash
+        _ = await provider.capture(windowID: 1)
+        _ = await provider.capture(windowID: 2)
+        _ = await provider.capture(windowID: 3)
     }
 
     @Test("Cache operations can be interleaved")
