@@ -65,6 +65,22 @@
         }
       }
     },
+    "Auto-hide taskbar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto-hide taskbar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer automatiquement"
+          }
+        }
+      }
+    },
     "Automatically start TaskLane when you log in." : {
       "localizations" : {
         "en" : {
@@ -93,6 +109,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arrière-plan"
+          }
+        }
+      }
+    },
+    "Behavior" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Behavior"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportement"
           }
         }
       }
@@ -305,6 +337,38 @@
         }
       }
     },
+    "Hide" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer"
+          }
+        }
+      }
+    },
+    "Hide delay" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide delay"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Délai avant masquage"
+          }
+        }
+      }
+    },
     "Hover delay" : {
       "localizations" : {
         "en" : {
@@ -381,6 +445,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Moyen"
+          }
+        }
+      }
+    },
+    "Move your cursor to the screen edge to show the taskbar." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move your cursor to the screen edge to show the taskbar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déplacez votre curseur vers le bord de l'écran pour afficher la barre."
           }
         }
       }
@@ -701,6 +781,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Court"
+          }
+        }
+      }
+    },
+    "Show" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher"
+          }
+        }
+      }
+    },
+    "Show All Windows" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show All Windows"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher toutes les fenêtres"
+          }
+        }
+      }
+    },
+    "Show Desktop" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Desktop"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le bureau"
           }
         }
       }

@@ -68,6 +68,34 @@ struct GeneralSettingsView: View {
                 Text(String(localized: "Clock"))
             }
 
+            // Behavior Section
+            Section {
+                Toggle(
+                    String(localized: "Auto-hide taskbar"),
+                    isOn: $state.settings.autoHide
+                )
+
+                if state.settings.autoHide {
+                    HStack {
+                        Text(String(localized: "Hide delay"))
+                        Slider(
+                            value: $state.settings.autoHideDelay,
+                            in: 0.2...3.0,
+                            step: 0.1
+                        )
+                        Text(String(format: "%.1fs", state.settings.autoHideDelay))
+                            .monospacedDigit()
+                            .frame(width: 40)
+                    }
+
+                    Text(String(localized: "Move your cursor to the screen edge to show the taskbar."))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            } header: {
+                Text(String(localized: "Behavior"))
+            }
+
             // Startup Section
             Section {
                 LaunchAtLoginToggle()

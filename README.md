@@ -78,11 +78,11 @@ Click the TaskLane icon in the menu bar and select **Settings** to customize:
 
 | Windows | TaskLane |
 |---------|----------|
-| Win + D | Click empty area (coming soon) |
+| Win + D | Click the thin bar at the right edge of the taskbar |
 | Hover taskbar | See window thumbnails |
 | Click app | Focus the app |
-| Right-click app | Context menu with Quit, Hide, etc. |
-| Pin to taskbar | Right-click > Pin |
+| Right-click app | Context menu: Show All Windows, Hide, Pin, Quit |
+| Pin to taskbar | Right-click > Pin to Taskbar |
 
 ## Requirements
 

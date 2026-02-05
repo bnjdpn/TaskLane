@@ -47,6 +47,7 @@ final class TaskbarController {
         }
 
         for panel in panels.values {
+            panel.cleanupAutoHide()
             panel.orderOut(nil)
             panel.close()
         }
@@ -88,7 +89,9 @@ final class TaskbarController {
 
     /// Refresh the layout of all panels (e.g., after settings change)
     func refreshLayout() {
+        guard let appState else { return }
         updatePanels()
+        updateAutoHideSettings(appState.settings)
     }
 
     // MARK: - Private Methods
@@ -122,6 +125,10 @@ final class TaskbarController {
 
         panel.setContent(content)
 
+        // Configure auto-hide
+        panel.autoHideDelay = settings.autoHideDelay
+        panel.autoHideEnabled = settings.autoHide
+
         // Position the panel
         panel.position(at: settings.position, size: settings.height)
 
@@ -129,6 +136,14 @@ final class TaskbarController {
         panel.orderFrontRegardless()
 
         return panel
+    }
+
+    /// Update auto-hide settings on all panels
+    private func updateAutoHideSettings(_ settings: TaskLaneSettings) {
+        for panel in panels.values {
+            panel.autoHideDelay = settings.autoHideDelay
+            panel.autoHideEnabled = settings.autoHide
+        }
     }
 
     private func handleScreensChanged() {

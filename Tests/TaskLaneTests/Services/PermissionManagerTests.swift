@@ -17,14 +17,7 @@ struct PermissionManagerTests {
         #expect(result == true || result == false)
     }
 
-    @Test("requestScreenRecording does not crash")
-    func requestScreenRecordingDoesNotCrash() {
-        let manager = PermissionManager()
-
-        // This triggers a system dialog in real usage, but in tests
-        // it should not crash (may do nothing or show dialog)
-        manager.requestScreenRecording()
-    }
+    // Note: requestScreenRecording() test removed - it triggers system permission dialogs
 
     @Test("hasScreenRecordingByWindowCheck returns boolean")
     func hasScreenRecordingByWindowCheckReturnsBool() {
@@ -44,14 +37,7 @@ struct PermissionManagerTests {
         #expect(result == true || result == false)
     }
 
-    @Test("requestAccessibilityPermission does not crash")
-    func requestAccessibilityPermissionDoesNotCrash() {
-        let manager = PermissionManager()
-
-        // Note: This may open System Settings in a real environment
-        // In tests, it should not crash
-        manager.requestAccessibilityPermission()
-    }
+    // Note: requestAccessibilityPermission() test removed - it triggers system permission dialogs
 
     // MARK: - Permission Status
 

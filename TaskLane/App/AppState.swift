@@ -22,6 +22,11 @@ final class AppState {
     var activeAppBundleID: String?
     var windowsByApp: [String: [WindowInfo]] = [:]
 
+    // MARK: - Show Desktop State
+
+    private(set) var isDesktopShown = false
+    private var appsHiddenForDesktop: [NSRunningApplication] = []
+
     // MARK: - Permissions
 
     var hasScreenRecordingPermission: Bool = false
@@ -72,9 +77,11 @@ final class AppState {
     // MARK: - Lifecycle
 
     func start() {
+        Log.app.info("TaskLane starting")
         appMonitor.startMonitoring()
         checkPermissions()
         refreshWindowList()
+        Log.app.info("TaskLane started with \(self.taskbarItems.count) taskbar items")
     }
 
     func stop() {
@@ -121,7 +128,12 @@ final class AppState {
     // MARK: - Permissions
 
     private func checkPermissions() {
+        let hadPermission = hasScreenRecordingPermission
         hasScreenRecordingPermission = permissionManager.hasScreenRecording()
+
+        if hasScreenRecordingPermission != hadPermission {
+            Log.permissions.info("Screen Recording permission: \(self.hasScreenRecordingPermission ? "granted" : "denied")")
+        }
     }
 
     func recheckPermissions() {
@@ -165,7 +177,7 @@ final class AppState {
 
         NSWorkspace.shared.openApplication(at: url, configuration: config) { _, error in
             if let error {
-                print("Failed to launch app: \(error)")
+                Log.app.error("Failed to launch app \(bundleID): \(error.localizedDescription)")
             }
         }
     }
@@ -197,5 +209,44 @@ final class AppState {
     func requestThumbnail(for windowID: CGWindowID) async -> NSImage? {
         guard hasScreenRecordingPermission else { return nil }
         return await thumbnailProvider.capture(windowID: windowID)
+    }
+
+    // MARK: - Show Desktop
+
+    /// Toggle between showing desktop (hiding all apps) and restoring them
+    func toggleShowDesktop() {
+        if isDesktopShown {
+            restoreFromDesktop()
+        } else {
+            showDesktop()
+        }
+    }
+
+    private func showDesktop() {
+        // Get all running apps (excluding self and system apps)
+        let runningApps = NSWorkspace.shared.runningApplications.filter { app in
+            app.activationPolicy == .regular && !app.isHidden
+        }
+
+        // Hide all visible apps
+        appsHiddenForDesktop = runningApps
+        for app in runningApps {
+            app.hide()
+        }
+
+        isDesktopShown = true
+        Log.app.debug("Show Desktop: hid \(runningApps.count) apps")
+    }
+
+    private func restoreFromDesktop() {
+        // Unhide previously hidden apps
+        let count = appsHiddenForDesktop.count
+        for app in appsHiddenForDesktop {
+            app.unhide()
+        }
+
+        appsHiddenForDesktop = []
+        isDesktopShown = false
+        Log.app.debug("Restore from Desktop: restored \(count) apps")
     }
 }

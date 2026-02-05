@@ -168,6 +168,26 @@ struct AppButtonView: View {
 
     @ViewBuilder
     private var contextMenuContent: some View {
+        if item.isRunning {
+            // Show All Windows
+            Button(String(localized: "Show All Windows")) {
+                showAllWindows()
+            }
+
+            // Hide / Unhide
+            if isAppHidden {
+                Button(String(localized: "Show")) {
+                    unhideApp()
+                }
+            } else {
+                Button(String(localized: "Hide")) {
+                    hideApp()
+                }
+            }
+
+            Divider()
+        }
+
         if item.isPinned {
             Button(String(localized: "Unpin from Taskbar")) {
                 appState.unpinApp(item.bundleIdentifier)
@@ -178,12 +198,46 @@ struct AppButtonView: View {
             }
         }
 
-        Divider()
-
         if item.isRunning {
+            Divider()
+
             Button(String(localized: "Quit \(item.displayName)")) {
                 quitApp()
             }
+        }
+    }
+
+    // MARK: - App State Helpers
+
+    private var isAppHidden: Bool {
+        guard let pid = item.processIdentifier,
+              let app = NSRunningApplication(processIdentifier: pid) else {
+            return false
+        }
+        return app.isHidden
+    }
+
+    // MARK: - App Actions
+
+    private func showAllWindows() {
+        if let pid = item.processIdentifier,
+           let app = NSRunningApplication(processIdentifier: pid) {
+            app.unhide()
+            app.activate()
+        }
+    }
+
+    private func hideApp() {
+        if let pid = item.processIdentifier,
+           let app = NSRunningApplication(processIdentifier: pid) {
+            app.hide()
+        }
+    }
+
+    private func unhideApp() {
+        if let pid = item.processIdentifier,
+           let app = NSRunningApplication(processIdentifier: pid) {
+            app.unhide()
         }
     }
 

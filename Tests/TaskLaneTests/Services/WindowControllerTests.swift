@@ -32,11 +32,7 @@ struct WindowControllerTests {
         #expect(result == true || result == false)
     }
 
-    @Test("requestAccessibilityPermission does not crash")
-    func requestAccessibilityPermissionDoesNotCrash() {
-        // Note: This may open System Settings in real usage
-        WindowController.requestAccessibilityPermission()
-    }
+    // Note: requestAccessibilityPermission() test removed - it triggers system permission dialogs
 
     // MARK: - Focus Window
 
