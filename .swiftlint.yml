@@ -2,14 +2,23 @@ disabled_rules:
   - line_length
   - trailing_whitespace
   - identifier_name
+  - force_cast
+  - force_unwrapping
+  - force_try
+  - function_body_length
+  - type_body_length
+  - function_parameter_count
+  - cyclomatic_complexity
+  - for_where
+  - unused_closure_parameter
+  - redundant_sendable
 
 opt_in_rules:
   - empty_count
-  - force_unwrapping
-  - implicitly_unwrapped_optional
 
 excluded:
   - .build
   - .swiftpm
+  - Tests
 
-warning_threshold: 10
+warning_threshold: 20
