@@ -43,7 +43,7 @@ struct WindowListPopover: View {
 
             Spacer()
 
-            if windows.count > 0 {
+            if !windows.isEmpty {
                 Text("\(windows.count) windows")
                     .font(.caption)
                     .foregroundStyle(.secondary)
