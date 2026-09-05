@@ -101,3 +101,7 @@ swift test --enable-code-coverage # With coverage (CI uses this)
 - **NSImage not Sendable**: Don't use `async let` with methods returning `NSImage?` - causes Swift 6 concurrency errors.
 - **Permission dialogs**: Never auto-call `requestAccessibilityPermission()` - triggers dialogs during builds/tests. Only request on explicit user action.
 - **SwiftLint trailing closures**: Use explicit `action:` and `label:` parameters for `Button`, not trailing closure syntax.
+
+## Public site and releases
+
+Apply [AGENTS.md](AGENTS.md) and the portable [site-release-sync](.agents/skills/site-release-sync/SKILL.md) workflow whenever a product change may affect public pages or download promises.

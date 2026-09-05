@@ -129,7 +129,7 @@ struct WindowRowView: View {
         if let thumb = thumbnail {
             Image(nsImage: thumb)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(maxHeight: appState.settings.previewSize)
                 .cornerRadius(4)
                 .shadow(radius: 2)

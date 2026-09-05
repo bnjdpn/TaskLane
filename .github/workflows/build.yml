@@ -14,6 +14,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Ruby for site release checks
+        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b
+        with:
+          ruby-version: "4.0.6"
+      - name: Verify the site release workflow
+        run: |
+          ruby .agents/skills/site-release-sync/scripts/check.rb --check
+          ruby .agents/skills/site-release-sync/scripts/check_test.rb
+
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:

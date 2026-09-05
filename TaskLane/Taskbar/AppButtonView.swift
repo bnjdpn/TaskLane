@@ -61,7 +61,7 @@ struct AppButtonView: View {
                 ZStack(alignment: .topTrailing) {
                     Image(nsImage: item.icon)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .frame(width: iconSize, height: iconSize)
                         .opacity(item.isRunning ? 1.0 : 0.6)
 
